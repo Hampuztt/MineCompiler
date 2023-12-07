@@ -1,0 +1,115 @@
+in r0 random
+in r2 random
+ldi r0 4096
+store 245 r0
+ldi r0 32767
+store 244 r0
+ldi r0 1
+store 243 r0
+ldi r0 14
+store 242 r0
+ldi r0 19
+store 241 r0
+ldi r0 3
+store 240 r0
+ldi r0 0
+store 239 r0
+ldi r0 8
+store 200 r0
+ldi r0 8
+store 201 r0
+ldi r0 8
+ldi r1 14
+mul r0 r1
+add r0 241
+add r0 239
+store 202 r0
+ldi r7 0
+ldi r1 3
+out vga_tile r1
+in r0 joystick
+cmp r0 1
+beq move_player
+cmp r0 2
+beq move_player
+cmp r0 3
+beq move_player
+cmp r0 4
+beq move_player
+cmp r0 5
+beq update_tile
+bra dont_move
+add r7 243
+out vga_tile r7
+load r0 200
+out vga_x r0
+load r0 201
+out vga_y r0
+draw
+ldi r0 75
+store 255 r0
+bra dont_move
+store 248 r1
+store 247 r2
+load r1 200
+load r2 201
+cmp r0 1
+beq move_left
+cmp r0 2
+beq move_right
+cmp r0 3
+beq move_up
+cmp r0 4
+beq move_down
+cmp r1 0
+bne normal_left
+ldi r1 20
+sub r1 243
+bra move_player_exit
+cmp r1 19
+bne normal_right
+ldi r1 65535
+add r1 243
+bra move_player_exit
+cmp r2 0
+bne normal_up
+ldi r2 15
+sub r2 243
+bra move_player_exit
+cmp r2 14
+bne normal_down
+ldi r2 65535
+add r2 243
+bra move_player_exit
+out vga_x r1
+out vga_y r2
+in r0 random
+out vga_tile r0
+drawcursor
+store 200 r1
+store 201 r2
+load r2 247
+load r1 248
+ldi r0 1000
+store 255 r0
+bra wait_loop
+ldi r0 15
+store 255 r0
+bra wait_loop
+store 248 r0
+store 247 r1
+store 246 r2
+load r0 255
+ldi r2 0
+ldi r1 0
+add r1 243
+cmp r1 r0
+bne 126
+ldi r1 0
+add r2 243
+cmp r2 r0
+bne 126
+load r2 246
+load r1 247
+load r0 248
+bra 42
