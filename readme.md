@@ -34,10 +34,22 @@ beq mem				--Jmp to mem if Z = 1
 # Compiler syntax
 
 * The compiler is case-insensitive and can process multiple spaces between arguments.
-* To include comments, use ';'. 			
-* To include labels, use 'label:'.
-* To assign names to constants, utilize the #define directive with the format 'name' 'value'.
-* It is crucial to avoid using the same name for a label and a constant, as it will result in overwriting.
+* To write comments, use ';'. 			
+* To start a label, use 'label_name:'.
+* To assign names to constants, use the #define instruction with the format 'name' 'value'.
+* Avoid using the same name for a label and a constant, as it will result in overwriting.
+
+# Examples
+Here are some example usages
+## Result of program
+![Compiler Example](images/compilerExample.png "Compiler example")
+## Example of warnings
+![Compiler warnings](images/warningExamples.png "Compiler warnings")
+
+
+## Finished game written with compiler
+![Compiled Minesweeper](images/gameExample.png "CompiledSweeper")
+
 
 # Naming convention
 
