@@ -8,9 +8,9 @@
 ```text
 
 Constants will be represented by the letter 'c'.
-Registers will be identified as Grx, where 'x' is the register number.
-Memory addresses will be referred to as 'mem'. (For now only constants can be used to my knowledge)
-Input/Output is referred to as IOx
+Registers will be called Grx, where 'x' is the register number.
+Memory addresses will be referred to as 'mem'. (For now, only constants can be used to my knowledge)
+Input/Output is referred to as IOx.
 
 ldi Grx c 			--Load Grx with c
 add Grx mem 		--Add Grx with value in mem
@@ -54,61 +54,39 @@ Here are some example usages
 # Naming convention
 
 * Constants should have UPPER_CASE
-* Defined memoryadresses m_name
+* Defined memory addresses m_name
   
-
-# To be implemented once microcode is tested
-
-* `"in Grx, IO": ?` r
-	* in random Grx 	   -- Get random value and store it in Grx
-
-
-* `"brareg": ` 
-	* bra Grx 		  --Branch to memory in register
-
-* `"mulmem": ` 
-	* mul grx PM(m) 		  --Multiply with value in memory
-
-* `"bge": 00111` 
-	* bge mem 		  --Branch if greater or equal
-  
-# Guide to add instructions to the compiler:
-
-1. Open the "input_check.py" file located in the "validation" folder.
-
-2. Add the name of your new instruction and the number of arguments it requires to the "ins_args" section.
+# If you want to add custom instructions to the compiler:
+1. Open the "input_check.py" file in the "validation" folder.
+2. 
+3. Add the name of your new instruction and the number of arguments it requires to the "ins_args" section.
 *For example: `"MY_INSTRUCTION": 3`*
 
-3. Create a new function called "check_args_MY_INSTRUCTION(args)" to validate the arguments for your new instruction.
+4. Create a new function called "check_args_MY_INSTRUCTION(args)" to validate the arguments for your new instruction.
 
-4. Use the "assert" statement to check that the arguments are valid.
+5. Use the "assert" statement to check the arguments' validity.
 
-5. In the "check_valid_args" function, add an "elif" statement to the instruction is "MY_INSTRUCTION," and call the "check_args_MY_INSTRUCTION()" function.
+6. In the "check_valid_args" function, add an "elif" statement to the instruction is "MY_INSTRUCTION," and call the "check_args_MY_INSTRUCTION()" function.
 
-  
+7. After all input validation is finished, open the "compiler.py" file in the "compiling" folder.
 
-6. Now all input validation is finshed, open the "compiler.py" file located in the "compiling" folder.
+8. Add "MY_INSTRUCTION" to operations with its corresponding operation code
 
-7. Add "MY_INSTRUCTION" to operations with it corrosponding operation code
+9. Create a new function called "compile_MY_INSTRUCTION()" and define how it should be compiled.
 
-8. Create a new function called "compile_MY_INSTRUCTION()" and define how it should be compiled.
+10. In the "compile_line" function, add an "elsif" statement to "MY_INSTRUCTION," and call the "compile_MY_INSTRUCTION()" function.
 
-9. In the "compile_line" function, add an "elsif" statement to "MY_INSTRUCTION," and call the "compile_MY_INSTRUCTION()" function.
-
-10. **Important!** Make a unittest in tester.py
+11. Don't forget to do a unit test!
 
 
 
 # Instructions for Usage
-
 If you wish to retain your current pMem in the sweeper_CPU directory, follow these steps:
 Run the main.py file located in the MineCompiler directory.
 Find the resulting file under the code_files directory named pMem.vhd.
 
 # Windows Script
-To compile and replace the pMem.vhd file directly in the sweeper_CPU directory, perform the following steps:
-
-# 1 Run the compile_windows file.
+Run the' compile_windows' file to compile and replace the pMem.vhd file directly in the sweeper_CPU directory.
 
 # Linux Script
-To create the necessary file for compilation in Linux, execute the command 'chmod +x compile_linux.sh' once. Afterward, you can simply run './compile_linux.sh' to compile and replace the pMem in the sweeper_CPU directory with the resulting file.
+Execute 'chmod +x compile_linux.sh' once. Afterward, you can run './compile_linux.sh' to compile and replace the pMem in the sweeper_CPU directory with the resulting file.
